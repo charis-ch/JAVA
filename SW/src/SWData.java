@@ -1,14 +1,17 @@
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
-
-import javax.print.attribute.standard.RequestingUserName;
 
 public abstract class SWData implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private static void saveState(SWData obj, Data feature) {
 
@@ -25,7 +28,7 @@ public abstract class SWData implements Serializable {
 		}
 	}
 
-	protected static SWData restoreState(Data feature) {
+	 static SWData restoreState(Data feature) {
 
 		SWData obj = null;
 
@@ -35,6 +38,21 @@ public abstract class SWData implements Serializable {
 			obj = (SWData) data.readObject();
 			data.close();
 			file.close();
+		} catch (FileNotFoundException notfound) {
+			System.out.println("File not found!\nCreation of the specified features has been  started...\n");
+			switch (feature) {
+
+			case PEOPLE: {
+				People people = new People();
+				people.saveCharacter(0, null);
+				return obj = people;
+			}
+			case PLANETS: {
+				return null;
+			}
+
+			}
+			return obj;
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
@@ -44,20 +62,21 @@ public abstract class SWData implements Serializable {
 			e.printStackTrace();
 			return null;
 		}
-		
+
 		return obj;
 	}
 
-	
-	public void printSWdata(){
-		
-		
-		
-		
+	public void printSWdata() {
+
 	}
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+SWData people=restoreState(Data.PEOPLE);
+//	System.out.println(people);
+	People  a=(People) people;
+	if(a.getCharacter(0)==null)
+	System.out.println("No characters exists");
 	}
 
 }

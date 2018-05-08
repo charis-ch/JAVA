@@ -3,20 +3,21 @@ import java.util.HashMap;
 
 public class People extends SWData {
 	
-	HashMap<Integer, People>  characters=new HashMap<Integer, People>();
+private 	HashMap<Integer, Character>  characters=new HashMap<Integer, Character>();
 	
 	
 	
-	People getCharacter(Integer character){
+	Character getCharacter(Integer character){
 		
-		return (People) characters.get(character);
+		return (Character) characters.get(character);
 		
 	}
 
-	void saveCharacter(Integer key, People value){
+	void saveCharacter(Integer key, Character value){
 		characters.put(key, value);
 		
 	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 

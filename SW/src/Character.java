@@ -13,8 +13,6 @@ public class Character {
 	 * 
 	 * Character's constructor
 	 * 
-	 * 
-	 * 
 	 */
 	public Character(String name, int height, int mass, String hair_colour, String skin_colour, String eye_colour,
 			String birth_year) {
