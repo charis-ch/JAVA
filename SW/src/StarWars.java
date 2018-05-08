@@ -15,7 +15,7 @@ import javax.swing.JButton;
 //import static SW.Data;
 public class StarWars extends Frame {
 
-	private JComboBox comboBox;
+	private JComboBox<String> comboBox;
 	private People characters;
 	private Resources json_resources;
 	private JButton btnGetCharacteristics;
@@ -34,83 +34,96 @@ public class StarWars extends Frame {
 			public void run() {
 				try {
 					StarWars frame = new StarWars();
-//System.out.println(frame.comboBox.getSelectedItem());
-					
-					
-
-					Character temp = null ;
-					int number = 1;//frame.comboBox.//getSelectedIndex();
-					try{
-					 temp = frame.characters.getCharacter(number);}
-					catch (NullPointerException nullpointer) {
-						// TODO: handle exception
-					
-						System.out.println("Not found!!!");
-						JSONObject selectedCharacter = frame.json_resources.requestResources(Data.PEOPLE,
-								number);
-						try {
-							temp = new Character(selectedCharacter.get("name").toString(),
-									Integer.parseInt(selectedCharacter.get("height").toString()),
-									Integer.parseInt(selectedCharacter.get("mass").toString()),
-									selectedCharacter.get("hair_color").toString(),
-									selectedCharacter.get("skin_color").toString(),
-									selectedCharacter.get("eye_color").toString(),
-									selectedCharacter.get("birth_year").toString());
-							frame.characters.saveCharacter(number, temp);
-							frame.textArea.setText(temp.getCharacteristics());
-						//	if(frame.characters==null)
-						//		System.out.println("null");
-						} catch (NumberFormatException | JSONException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-					}if(frame.characters==null)
-						System.out.println("null");else
-							if(frame.characters.getCharacter(number)==null)
-								System.out.println("null2");else
-					frame.textArea.setText(frame.characters.getCharacter(number).getCharacteristics());
-					
-					
+					// System.out.println(frame.comboBox.getSelectedItem());
+					/**
+					 * Character temp = null; int number = 1;// frame.comboBox.//getSelectedIndex();
+					 * try { temp = frame.characters.getCharacter(number); } catch
+					 * (NullPointerException nullpointer) { // TODO: handle exception
+					 * 
+					 * System.out.println("Not found!!!"); JSONObject selectedCharacter =
+					 * frame.json_resources.requestResources(Data.PEOPLE, number); try { temp = new
+					 * Character(selectedCharacter.get("name").toString(),
+					 * Integer.parseInt(selectedCharacter.get("height").toString()),
+					 * Integer.parseInt(selectedCharacter.get("mass").toString()),
+					 * selectedCharacter.get("hair_color").toString(),
+					 * selectedCharacter.get("skin_color").toString(),
+					 * selectedCharacter.get("eye_color").toString(),
+					 * selectedCharacter.get("birth_year").toString());
+					 * frame.characters.saveCharacter(number, temp);
+					 * frame.textArea.setText(temp.getCharacteristics()); //
+					 * if(frame.characters==null) // System.out.println("null"); } catch
+					 * (NumberFormatException | JSONException e1) { // TODO Auto-generated catch
+					 * block e1.printStackTrace(); } } if (frame.characters == null)
+					 * System.out.println("null"); else if (frame.characters.getCharacter(number) ==
+					 * null) System.out.println("null2"); else
+					 * frame.textArea.setText(frame.characters.getCharacter(number).getCharacteristics());
+					 */
 					// TODO Auto-generated method stub
 
-				
 					frame.btnGetCharacteristics.addActionListener(new ActionListener() {
 
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							Character temp = null ;
-							int number = 1;//frame.comboBox.//getSelectedIndex();
-							try{
-							 temp = frame.characters.getCharacter(number);}
-							catch (NullPointerException nullpointer) {
+							Character temp = null;
+							int sel = 0;
+							int height = 0;
+							int mass = 0;
+							int number = 1;// frame.comboBox.//getSelectedIndex();
+							// try {
+							if (frame.comboBox == null)
+								System.out.println("NUll list");
+							else {
+								sel = frame.comboBox.getSelectedIndex();
+								System.out.println("Selected index is:" + sel);
+							}
+
+							temp = frame.characters.getCharacter(sel);
+							if (temp == null) {
+								System.out.println("Null character (not exists in ser file)");
+								// } catch (NullPointerException nullpointer)
+
 								// TODO: handle exception
-							
+
 								System.out.println("Not found!!!");
-								JSONObject selectedCharacter = frame.json_resources.requestResources(Data.PEOPLE,
-										number);
+								JSONObject selectedCharacter = frame.json_resources.requestResources(Data.PEOPLE, sel);
 								try {
+									try {
+										height = Integer.parseInt(selectedCharacter.get("height").toString());
+									} catch (NumberFormatException unknown) {
+										height = -1;
+									}
+									try {
+										mass = Integer.parseInt(selectedCharacter.get("mass").toString());
+									} catch (NumberFormatException unknown) {
+										mass = -1;
+									}
+
 									temp = new Character(selectedCharacter.get("name").toString(),
-											Integer.parseInt(selectedCharacter.get("height").toString()),
-											Integer.parseInt(selectedCharacter.get("mass").toString()),
-											selectedCharacter.get("hair_color").toString(),
+
+											height, mass, selectedCharacter.get("hair_color").toString(),
 											selectedCharacter.get("skin_color").toString(),
 											selectedCharacter.get("eye_color").toString(),
 											selectedCharacter.get("birth_year").toString());
-									frame.characters.saveCharacter(number, temp);
+									frame.characters.saveCharacter(sel, temp);
 									frame.textArea.setText(temp.getCharacteristics());
-								//	if(frame.characters==null)
-								//		System.out.println("null");
-								} catch (NumberFormatException | JSONException e1) {
+									// if(frame.characters==null)
+									// System.out.println("null");
+
+								} catch (NullPointerException nullPointer) {
+
+								} catch (JSONException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}
-							}if(frame.characters==null)
-								System.out.println("null");else
-									if(frame.characters.getCharacter(number)==null)
-										System.out.println("null2");else
-							frame.textArea.setText(frame.characters.getCharacter(number).getCharacteristics());
-							
-							
+							}
+							if (frame.characters == null)
+								System.out.println("null");
+							else if (frame.characters.getCharacter(sel) == null)
+								System.out.println("null2!");
+							else {
+								frame.textArea.setText(frame.characters.getCharacter(sel).getCharacteristics());
+								System.out.println("Already exist!");
+							}
 							// TODO Auto-generated method stub
 
 						}
@@ -139,11 +152,11 @@ public class StarWars extends Frame {
 				System.out.println(names.length);
 			}
 		}
-		JComboBox comboBox = new JComboBox(names);
+		comboBox = new JComboBox(names);
 		comboBox.setBounds(53, 24, 151, 20);
 		getContentPane().add(comboBox);
 
-		 textArea = new JTextArea();
+		textArea = new JTextArea();
 		textArea.setBounds(79, 271, 277, 164);
 		contentPane.add(textArea);
 

@@ -36,9 +36,18 @@ public class Character {
 	 */
 
 	public String getCharacteristics() {
-
-		return "Name:        " + name + "\n" + "Height:      " + height + " cm" + "\n" + "Mass:        " + mass + " Kg"
-				+ "\n" + "Hair colour: " + hair_colour + "\n" + "Skin colour: " + skin_colour + "\n" + "Eye colour:  "
+		String height = "";
+		String mass = "";
+		if (this.height == -1)
+			height = "unknown";
+		else
+			height = String.valueOf(this.height) + " cm";
+		if (this.mass == -1)
+			mass = "unknown";
+		else
+			mass = String.valueOf(this.mass) + " Kg";
+		return "Name:        " + name + "\n" + "Height:      " + height + "\n" + "Mass:        " + mass + "\n"
+				+ "Hair colour: " + hair_colour + "\n" + "Skin colour: " + skin_colour + "\n" + "Eye colour:  "
 				+ eye_colour + "\n" + "Birth year:  " + birth_year;
 
 	}
