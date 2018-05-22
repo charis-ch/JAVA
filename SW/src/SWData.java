@@ -43,6 +43,7 @@ public abstract class SWData implements Serializable {
 			switch (feature) {
 
 			case PEOPLE: {
+				//: TODO initiliaze total characters 
 				People people = new People();
 				people.saveCharacter(0, null);
 				return obj = people;

@@ -51,6 +51,14 @@ public class Character {
 				+ eye_colour + "\n" + "Birth year:  " + birth_year;
 
 	}
+	
+	
+	public String getName(){
+		
+		
+		return this.name;
+		
+	}
 
 	/***
 	 * 
