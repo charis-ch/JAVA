@@ -1,9 +1,11 @@
+import java.util.ArrayList;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Resources extends SW_Standards {
 
-
+static ArrayList <String> chars=new ArrayList<String>();
 
 	/**
 	 * 
@@ -77,15 +79,41 @@ public class Resources extends SW_Standards {
 		return elements;
 		// return null;
 	}
+	
+
+	
 
 	public static void main(String[] args) {
 		// get the 87 characters and 61 planets
+/*
+		SWThread a = new SWThread();
+		SWThread b = new SWThread();
+		SWThread c = new SWThread();
+		SWThread d = new SWThread();
+		SWThread e = new SWThread();
 
+		a.run(0, Data.PEOPLE);System.out.println("Next!");
+		b.run(1, Data.PEOPLE);System.out.println("Next!");
+		c.run(2, Data.PEOPLE);System.out.println("Next!");
+		d.run(3, Data.PEOPLE);System.out.println("Next!");
+		e.run(4, Data.PEOPLE);
+	**/	
+		/**
+		Resources res = new Resources();
+		JSONObject resource = res.requestResources(Data.PEOPLE, 0);	
+		try {
+			resource.get("results").toString();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		**/
+		/**
 		Resources resource = new Resources();
-
 		resource.get(Data.PEOPLE);
 		SW_Standards a = new Resources();
-
+*/
 		//
 		// Resources resource = new Resources();
 		// JSONObject actors = resource.requestResources(Data.PEOPLE, 0);
