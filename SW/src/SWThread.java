@@ -5,21 +5,31 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class SWThread extends SW_Standards implements Runnable {
-	private static String elements[] = new String[90];
+	private static String elements[] ;//= new String[90];
+	private static Thread mainThread;
 	private int thread;
 	private Data data;
 	private int limit;
 	private final AtomicBoolean running = new AtomicBoolean(true);
-	private Thread task;
+
 	static int counter = 1;
 
+	
+	public static void setThread(Thread main) {
+		
+		
+		mainThread=main;
+	}
 	public static String[] downloadCharacters(int total) {
 		elements=new String[total];
+		
+
 		ExecutorService exec = Executors.newFixedThreadPool(5);
 
 		for (int i = 0; i < 5; i++)
 			exec.execute(new SWThread(i, Data.PEOPLE));
 		exec.shutdown();
+
 		return elements;
 
 	}
@@ -29,7 +39,7 @@ public class SWThread extends SW_Standards implements Runnable {
 		thread = i;
 		data = feature;
 		limit = 20 * i + 20;
-		/// thread2=this
+
 		// TODO Auto-generated constructor stub
 	}
 
@@ -56,8 +66,6 @@ public class SWThread extends SW_Standards implements Runnable {
 			 if (thread == 4)
 			limit = 87;
 
-			System.out.println("i= " + i);
-			// TODO Auto-generated method stub
 			for (i = i + 1; i <= limit; i++) {
 
 				uri = data.name().toLowerCase() + "/" + String.valueOf(i) + "/";
@@ -72,23 +80,14 @@ public class SWThread extends SW_Standards implements Runnable {
 					obj = new JSONObject(str);
 					elements[i] = obj.get("name").toString();
 				}
-				// System.out.println(obj.get("name"));
 
 				catch (JSONException e) {
 
 					e.printStackTrace();
-				} catch (NullPointerException nullPointer) {
-					/// return null;
-				}
+				} 
 
 			}
-			// System.out.println("Thread = " + thread);
-			// System.out.println("limit=" + limit);
-			// System.out.println(counter++ +
-			// "=================================");
-			for (int x = y; x <= limit; x++) {
-				System.out.println(x + "  " + elements[x]);
-			}
+
 
 			running.set(false);
 		}

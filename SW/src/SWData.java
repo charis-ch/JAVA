@@ -13,10 +13,10 @@ public abstract class SWData implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private static void saveState(SWData obj, Data feature) {
+	 static void saveState(SWData obj, Data feature) {
 
 		try {
-			FileOutputStream file = new FileOutputStream("/tmp/" + feature.name() + ".ser");
+			FileOutputStream file = new FileOutputStream( feature.name() + ".ser");
 			ObjectOutputStream data = new ObjectOutputStream(file);
 			data.writeObject(obj);
 			data.close();
@@ -33,7 +33,7 @@ public abstract class SWData implements Serializable {
 		SWData obj = null;
 
 		try {
-			FileInputStream file = new FileInputStream("/tmp/" + feature.name() + ".ser");
+			FileInputStream file = new FileInputStream(feature.name() + ".ser");
 			ObjectInputStream data = new ObjectInputStream(file);
 			obj = (SWData) data.readObject();
 			data.close();

@@ -31,7 +31,9 @@ static ArrayList <String> chars=new ArrayList<String>();
 
 		try {
 			str = accessURL(uri);
+			System.out.println("Just access");
 			obj = new JSONObject(str);
+	
 		}
 		// System.out.println(obj.get("name"));
 
@@ -41,6 +43,9 @@ static ArrayList <String> chars=new ArrayList<String>();
 		} catch (NullPointerException nullPointer) {
 			return null;
 		}
+		
+		if(obj==null)
+			System.out.println("dsfgdsfdsfdsfds");
 		return obj;
 
 	}

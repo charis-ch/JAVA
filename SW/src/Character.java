@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class Character {
+public class Character  implements Serializable{
 
 	String name;
 	int height;
@@ -51,13 +52,17 @@ public class Character {
 				+ eye_colour + "\n" + "Birth year:  " + birth_year;
 
 	}
-	
-	
-	public String getName(){
-		
-		
+
+	public String getName() {
+
 		return this.name;
-		
+
+	}
+
+	public Character(String name) {
+		// TODO Auto-generated constructor stub
+
+		this.name = name;
 	}
 
 	/***

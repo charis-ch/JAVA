@@ -25,10 +25,15 @@ public class People extends SWData {
 	public void printKnownCharacters(){
 		
 		for(Integer key:characters.keySet()){
-			
+		try {	
 			Character temp=characters.get(key);
-			System.out.println("NUmber : "+key+"\t"+temp.getName());
+			//System.out.println("NUmber : "+key+"\t"+temp.getName());
+			System.out.println(temp.getCharacteristics());
+		}catch (NullPointerException e) {
 			
+		}
+		
+		
 			
 		}
 		
