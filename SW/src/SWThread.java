@@ -1,21 +1,21 @@
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class SWThread extends SW_Standards implements Runnable {
 	private static String elements[] ;//= new String[90];
 	private static Thread mainThread;
-	private int thread;
-	private Data data;
-	private int limit;
+	int thread;
+	Data data;
+	int limit ;
+	int i;
 	private final AtomicBoolean running = new AtomicBoolean(true);
 
-	static int counter = 1;
-
 	
-	public static void setThread(Thread main) {
+public static void setThread(Thread main) {
 		
 		
 		mainThread=main;
@@ -32,65 +32,78 @@ public class SWThread extends SW_Standards implements Runnable {
 
 		return elements;
 
-	}
+}
+	public SWThread(int x, Data people) {
 
-	public SWThread(int i, Data feature) {
-
-		thread = i;
-		data = feature;
-		limit = 20 * i + 20;
-
+		thread = x;
+		data = people;
+		limit = 20 * thread + 20;
+		i=20*thread;
 		// TODO Auto-generated constructor stub
 	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		// SWThread a = new SWThread(0, Data.PEOPLE);
+		// SWThread b = new SWThread(1, Data.PEOPLE);
+		// SWThread c = new SWThread(2, Data.PEOPLE);
+		// SWThread d = new SWThread(3, Data.PEOPLE);
+		// SWThread e = new SWThread(4, Data.PEOPLE);
+		/**
+		 * a.run(0, Data.PEOPLE);System.out.println("Next!"); b.run(1,
+		 * Data.PEOPLE);System.out.println("Next!"); c.run(2,
+		 * Data.PEOPLE);System.out.println("Next!"); d.run(3,
+		 * Data.PEOPLE);System.out.println("Next!"); e.run(4, Data.PEOPLE);
+		 **/
+		// new Thread(new SWThread(0, Data.PEOPLE)).start();//).start();
 		ExecutorService exec = Executors.newFixedThreadPool(5);
 
 		for (int i = 0; i < 5; i++)
-			exec.execute(new SWThread(i, Data.PEOPLE));
+			exec.execute(new SWThread2(i, Data.PEOPLE));
 		exec.shutdown();
 
 	}
 
 	@Override
-	public void run() {
+	public void run() {// (int thread, Data data) {
+		
+			while (running.get()) {
+				int i = 20 * thread;
+				String uri;
+				JSONObject obj = null;
+				int y = i + 1;
+			
+				if (thread==4)
+					limit = 87;
+				// TODO Auto-generated method stub
+				for (i = i + 1; i <= limit; i++) {
 
-		while (running.get()) {
-			int i = 20 * thread;
-			String uri;
-			JSONObject obj = null;
-			int y = i + 1;
+					uri = data.name().toLowerCase() + "/" + String.valueOf(i) + "/";
 
-			 if (thread == 4)
-			limit = 87;
+					uri = BASE + uri + JSON;
 
-			for (i = i + 1; i <= limit; i++) {
+					String str;
+					str = "";
 
-				uri = data.name().toLowerCase() + "/" + String.valueOf(i) + "/";
+					try {
+						str = accessURL(uri);
+						obj = new JSONObject(str);
+						elements[i] = obj.get("name").toString();
+					}
+					// System.out.println(obj.get("name"));
 
-				uri = BASE + uri + JSON;
+					catch (JSONException e) {
 
-				String str;
-				str = "";
+						e.printStackTrace();
+					} catch (NullPointerException nullPointer) {
+						/// return null;
+					}
 
-				try {
-					str = accessURL(uri);
-					obj = new JSONObject(str);
-					elements[i] = obj.get("name").toString();
 				}
+				
 
-				catch (JSONException e) {
-
-					e.printStackTrace();
-				} 
-
+				running.set(false);
 			}
-
-
-			running.set(false);
-		}
 
 	}
 }
