@@ -1,28 +1,34 @@
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class SWThread extends SW_Standards implements Runnable {
-	private static String elements[] ;//= new String[90];
-	private static Thread mainThread;
+	private static String elements[];// = new String[90];
+	int range = 20;
 	int thread;
 	Data data;
-	int limit ;
+	int limit;
 	int i;
+	private static int lastCharacter=87;
 	private final AtomicBoolean running = new AtomicBoolean(true);
 
-	
-public static void setThread(Thread main) {
-		
-		
-		mainThread=main;
+	public static String[] downloadCharacters(int start,int end) {
+		elements = new String[end+1];
+
+		ExecutorService exec = Executors.newFixedThreadPool(5);
+int range=(end-start)/5;
+lastCharacter=end;
+		for (int i = 0; i < 5; i++)
+			exec.execute(new SWThread(i,range, Data.PEOPLE));
+		exec.shutdown();
+
+		return elements;
+
 	}
 	public static String[] downloadCharacters(int total) {
-		elements=new String[total];
-		
+		elements = new String[total];
 
 		ExecutorService exec = Executors.newFixedThreadPool(5);
 
@@ -32,16 +38,29 @@ public static void setThread(Thread main) {
 
 		return elements;
 
-}
+	}
+
 	public SWThread(int x, Data people) {
 
 		thread = x;
 		data = people;
-		limit = 20 * thread + 20;
-		i=20*thread;
+		limit = range * thread + range;
+		i = range * thread;
 		// TODO Auto-generated constructor stub
 	}
 
+	public SWThread(int i2, int range2, Data people) {
+		
+		
+		thread = i2;
+		data = people;
+		range=range2;
+		limit = range * thread + range;
+		i = range * thread;
+		
+		
+		// TODO Auto-generated constructor stub
+	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		// SWThread a = new SWThread(0, Data.PEOPLE);
@@ -59,51 +78,49 @@ public static void setThread(Thread main) {
 		ExecutorService exec = Executors.newFixedThreadPool(5);
 
 		for (int i = 0; i < 5; i++)
-			exec.execute(new SWThread2(i, Data.PEOPLE));
+			exec.execute(new SWThread(i, Data.PEOPLE));
 		exec.shutdown();
 
 	}
 
 	@Override
 	public void run() {// (int thread, Data data) {
-		
-			while (running.get()) {
-				int i = 20 * thread;
-				String uri;
-				JSONObject obj = null;
-				int y = i + 1;
-			
-				if (thread==4)
-					limit = 87;
-				// TODO Auto-generated method stub
-				for (i = i + 1; i <= limit; i++) {
 
-					uri = data.name().toLowerCase() + "/" + String.valueOf(i) + "/";
+		while (running.get()) {
+			int i = range * thread;
+			String uri;
+			JSONObject obj = null;
 
-					uri = BASE + uri + JSON;
+			if (thread == 4)
+				limit = lastCharacter;
+			// TODO Auto-generated method stub
+			for (i = i + 1; i <= limit; i++) {
 
-					String str;
-					str = "";
+				uri = data.name().toLowerCase() + "/" + String.valueOf(i) + "/";
 
-					try {
-						str = accessURL(uri);
-						obj = new JSONObject(str);
-						elements[i] = obj.get("name").toString();
-					}
-					// System.out.println(obj.get("name"));
+				uri = BASE + uri + JSON;
 
-					catch (JSONException e) {
+				String str;
+				str = "";
 
-						e.printStackTrace();
-					} catch (NullPointerException nullPointer) {
-						/// return null;
-					}
-
+				try {
+					str = accessURL(uri);
+					obj = new JSONObject(str);
+					elements[i] = obj.get("name").toString();
 				}
-				
+				// System.out.println(obj.get("name"));
 
-				running.set(false);
+				catch (JSONException e) {
+
+					e.printStackTrace();
+				} catch (NullPointerException nullPointer) {
+					/// return null;
+				}
+
 			}
+
+			running.set(false);
+		}
 
 	}
 }

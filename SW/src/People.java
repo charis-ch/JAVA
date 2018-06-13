@@ -2,7 +2,7 @@ import java.util.HashMap;
 
 public class People extends SWData {
 
-	private int totalCharacters=0;
+	private int totalCharacters;
 	private HashMap<Integer, Character> characters = new HashMap<Integer, Character>();
 
 	
@@ -13,13 +13,12 @@ public class People extends SWData {
 	}
 	
 	
-	public int getCharacters(){
+
+	public int getTotalCharacters(){
+		
 		
 		return totalCharacters;
-		
-	}
-	
-	
+	}	
 	
 	
 	public void printKnownCharacters(){
