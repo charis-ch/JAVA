@@ -6,12 +6,12 @@ import org.json.JSONObject;
 
 public class SWThread extends SW_Standards implements Runnable {
 	private static String elements[];// = new String[90];
-	int range = 20;
+static	int range = 20;
 	int thread;
 	Data data;
 	int limit;
 	int i;
-	private static int lastCharacter=87;
+	private static int finalData;
 	private final AtomicBoolean running = new AtomicBoolean(true);
 
 	public static String[] downloadCharacters(int start,int end) {
@@ -19,7 +19,7 @@ public class SWThread extends SW_Standards implements Runnable {
 
 		ExecutorService exec = Executors.newFixedThreadPool(5);
 int range=(end-start)/5;
-lastCharacter=end;
+finalData=end;
 		for (int i = 0; i < 5; i++)
 			exec.execute(new SWThread(i,range, Data.PEOPLE));
 		exec.shutdown();
@@ -28,8 +28,9 @@ lastCharacter=end;
 
 	}
 	public static String[] downloadCharacters(int total) {
+		finalData=total;
 		elements = new String[total];
-
+range=total/5;System.out.println("Range= "+range);
 		ExecutorService exec = Executors.newFixedThreadPool(5);
 
 		for (int i = 0; i < 5; i++)
@@ -49,11 +50,11 @@ lastCharacter=end;
 		// TODO Auto-generated constructor stub
 	}
 
-	public SWThread(int i2, int range2, Data people) {
+	public SWThread(int i2, int range2, Data data) {
 		
 		
 		thread = i2;
-		data = people;
+		this.data = data;
 		range=range2;
 		limit = range * thread + range;
 		i = range * thread;
@@ -92,7 +93,7 @@ lastCharacter=end;
 			JSONObject obj = null;
 
 			if (thread == 4)
-				limit = lastCharacter;
+				limit = finalData;
 			// TODO Auto-generated method stub
 			for (i = i + 1; i <= limit; i++) {
 

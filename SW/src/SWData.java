@@ -48,8 +48,10 @@ public abstract class SWData implements Serializable {
 				people.saveCharacter(0, null);
 				return obj = people;
 			}
-			case PLANETS: {
-				return null;
+			case PLANETS: {Planets planets = new Planets();
+			planets.savePlanet(0, null);
+			return obj = planets;
+				
 			}
 
 			}

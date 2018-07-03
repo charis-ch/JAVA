@@ -17,10 +17,13 @@ public class StarWars extends Frame {
 
 	private JComboBox<String> comboBox;
 	private People characters;
+	private Planets planets;
 	private Resources json_resources;
 	private JButton btnGetCharacteristics;
 	private JTextArea textArea;
-	private JProgressBar progressBar;
+	private JComboBox comboBox_1;
+
+	// private JProgressBar progressBar;
 	/**
 	 * 
 	 */
@@ -147,97 +150,122 @@ public class StarWars extends Frame {
 	 */
 	public StarWars() {
 		super.setTitle("Star Wars Informer");
-		
+
 		requestPeopleData();
 		requestPlanetsData();
 
-			
-			comboBox.setBounds(53, 24, 151, 20);
-			getContentPane().add(comboBox);
+		comboBox.setBounds(53, 24, 151, 20);
+		getContentPane().add(comboBox);
 
-			textArea = new JTextArea();
-			textArea.setBounds(79, 271, 277, 164);
-			contentPane.add(textArea);
+		textArea = new JTextArea();
+		textArea.setBounds(79, 271, 277, 164);
+		contentPane.add(textArea);
 
-			JComboBox comboBox_1 = new JComboBox<Object>();
-			comboBox_1.setBounds(340, 24, 228, 20);
-			contentPane.add(comboBox_1);
-			/**
-			 * JCheckBox chckbxHeght = new JCheckBox("Heght");
-			 * chckbxHeght.setBounds(43, 99, 97, 23);
-			 * contentPane.add(chckbxHeght);
-			 * 
-			 * JCheckBox chckbxMass = new JCheckBox("Mass");
-			 * chckbxMass.setBounds(142, 99, 97, 23);
-			 * contentPane.add(chckbxMass);
-			 * 
-			 * JCheckBox chckbxHairColor = new JCheckBox("Hair color");
-			 * chckbxHairColor.setBounds(43, 125, 97, 23);
-			 * contentPane.add(chckbxHairColor);
-			 * 
-			 * JCheckBox chckbxSkinColor = new JCheckBox("Skin color");
-			 * chckbxSkinColor.setBounds(142, 125, 97, 23);
-			 * contentPane.add(chckbxSkinColor);
-			 * 
-			 * JCheckBox chckbxEyeColor = new JCheckBox("Eye color");
-			 * chckbxEyeColor.setBounds(43, 151, 97, 23);
-			 * contentPane.add(chckbxEyeColor);
-			 * 
-			 * JCheckBox chckbxBirthYear = new JCheckBox("Birth Year");
-			 * chckbxBirthYear.setBounds(142, 151, 97, 23);
-			 * contentPane.add(chckbxBirthYear);
-			 * 
-			 * JCheckBox chckbxRotationPeriod = new JCheckBox("Rotation
-			 * period"); chckbxRotationPeriod.setBounds(335, 99, 129, 23);
-			 * contentPane.add(chckbxRotationPeriod);
-			 * 
-			 * JCheckBox chckbxDiameter = new JCheckBox("Diameter");
-			 * chckbxDiameter.setBounds(335, 125, 97, 23);
-			 * contentPane.add(chckbxDiameter);
-			 * 
-			 * JCheckBox chckbxClimate = new JCheckBox("Climate");
-			 * chckbxClimate.setBounds(335, 151, 97, 23);
-			 * contentPane.add(chckbxClimate);
-			 * 
-			 * JCheckBox chckbxGravity = new JCheckBox("Gravity");
-			 * chckbxGravity.setBounds(471, 99, 97, 23);
-			 * contentPane.add(chckbxGravity);
-			 * 
-			 * JCheckBox chckbxTerrain = new JCheckBox("Terrain");
-			 * chckbxTerrain.setBounds(471, 125, 97, 23);
-			 * contentPane.add(chckbxTerrain);
-			 * 
-			 * JCheckBox chckbxSurfaceWater = new JCheckBox("Surface water");
-			 * chckbxSurfaceWater.setBounds(471, 151, 118, 23);
-			 * contentPane.add(chckbxSurfaceWater);
-			 **/
-			btnGetCharacteristics = new JButton("Get characteristics");
-			btnGetCharacteristics.setBounds(234, 214, 186, 23);
-			contentPane.add(btnGetCharacteristics);
+		JComboBox comboBox_1 = new JComboBox<Object>();
+		comboBox_1.setBounds(340, 24, 228, 20);
+		contentPane.add(comboBox_1);
+		/**
+		 * JCheckBox chckbxHeght = new JCheckBox("Heght");
+		 * chckbxHeght.setBounds(43, 99, 97, 23); contentPane.add(chckbxHeght);
+		 * 
+		 * JCheckBox chckbxMass = new JCheckBox("Mass");
+		 * chckbxMass.setBounds(142, 99, 97, 23); contentPane.add(chckbxMass);
+		 * 
+		 * JCheckBox chckbxHairColor = new JCheckBox("Hair color");
+		 * chckbxHairColor.setBounds(43, 125, 97, 23);
+		 * contentPane.add(chckbxHairColor);
+		 * 
+		 * JCheckBox chckbxSkinColor = new JCheckBox("Skin color");
+		 * chckbxSkinColor.setBounds(142, 125, 97, 23);
+		 * contentPane.add(chckbxSkinColor);
+		 * 
+		 * JCheckBox chckbxEyeColor = new JCheckBox("Eye color");
+		 * chckbxEyeColor.setBounds(43, 151, 97, 23);
+		 * contentPane.add(chckbxEyeColor);
+		 * 
+		 * JCheckBox chckbxBirthYear = new JCheckBox("Birth Year");
+		 * chckbxBirthYear.setBounds(142, 151, 97, 23);
+		 * contentPane.add(chckbxBirthYear);
+		 * 
+		 * JCheckBox chckbxRotationPeriod = new JCheckBox("Rotation period");
+		 * chckbxRotationPeriod.setBounds(335, 99, 129, 23);
+		 * contentPane.add(chckbxRotationPeriod);
+		 * 
+		 * JCheckBox chckbxDiameter = new JCheckBox("Diameter");
+		 * chckbxDiameter.setBounds(335, 125, 97, 23);
+		 * contentPane.add(chckbxDiameter);
+		 * 
+		 * JCheckBox chckbxClimate = new JCheckBox("Climate");
+		 * chckbxClimate.setBounds(335, 151, 97, 23);
+		 * contentPane.add(chckbxClimate);
+		 * 
+		 * JCheckBox chckbxGravity = new JCheckBox("Gravity");
+		 * chckbxGravity.setBounds(471, 99, 97, 23);
+		 * contentPane.add(chckbxGravity);
+		 * 
+		 * JCheckBox chckbxTerrain = new JCheckBox("Terrain");
+		 * chckbxTerrain.setBounds(471, 125, 97, 23);
+		 * contentPane.add(chckbxTerrain);
+		 * 
+		 * JCheckBox chckbxSurfaceWater = new JCheckBox("Surface water");
+		 * chckbxSurfaceWater.setBounds(471, 151, 118, 23);
+		 * contentPane.add(chckbxSurfaceWater);
+		 **/
+		btnGetCharacteristics = new JButton("Get characteristics");
+		btnGetCharacteristics.setBounds(234, 214, 186, 23);
+		contentPane.add(btnGetCharacteristics);
 
-			this.addWindowListener(new WindowAdapter() {
+		this.addWindowListener(new WindowAdapter() {
 
-				public void windowClosing(WindowEvent windowEvent) {
+			public void windowClosing(WindowEvent windowEvent) {
 
-					System.out.println("Closing window");
-					SWData a = characters;
-					SWData.saveState(a, Data.PEOPLE);
-					characters.printKnownCharacters();
-				}
-			});
-		}
+				System.out.println("Closing window");
+				SWData a = characters;
+				SWData.saveState(a, Data.PEOPLE);
+				characters.printKnownCharacters();
+			}
+		});
+	}
 
 	private void requestPlanetsData() {
-	
-		
-		
-		
-		
+
+		System.out.println("in");
+		SWData savedPlanets = SWData.restoreState(Data.PLANETS);
+		String names[] = null;
+		if (savedPlanets instanceof Planets) {
+			// System.out.println("People is instance of SWData");
+			planets = (Planets) savedPlanets;
+			json_resources = new Resources();
+			int total_planets = 0;
+			try {
+
+				total_planets = (json_resources.requestResources(Data.PLANETS, 0)).getInt("count") + 1; // get
+																										// the
+																										// current
+																										// total
+																										// characters
+																										// of
+																										// swapi
+
+				System.out.println("Total planets=" + total_planets);
+			} catch (JSONException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+
+			if (planets.getPlanet(1) == null) {
+
+				/// SWThread.setThread(Thread.currentThread());
+				names = SWThread.downloadCharacters(total_planets);
+				System.out.println("NUll is 1");
+				planets.setTotalPlanets(total_planets);
+
+			}
+		}
 	}
 
 	private void requestPeopleData() {
-		
-		
+
 		SWData savedPeople = SWData.restoreState(Data.PEOPLE);
 		String names[] = null;
 		if (savedPeople instanceof People) {
@@ -247,13 +275,13 @@ public class StarWars extends Frame {
 			int total_chars = 0;
 			try {
 
-				total_chars = (json_resources.requestResources(Data.PEOPLE, 0)).getInt("count") + 1; // get
+				total_chars = (json_resources.requestResources(Data.PEOPLE, 0)).getInt("count") + 2; // get
 																										// the
 																										// current
 																										// total
 																										// characters
 																										// of
-																										// swapi
+											System.out.println("Total characters="+ total_chars);															// swapi
 			} catch (JSONException e2) {
 				// TODO Auto-generated catch block
 				e2.printStackTrace();
@@ -301,25 +329,23 @@ public class StarWars extends Frame {
 				int savedCharacters = characters.getTotalCharacters();
 				System.out.println("Size= " + savedCharacters);
 				if (savedCharacters != total_chars) {
-					
-						
-					
-						names = new String[total_chars];
-						names = SWThread.downloadCharacters(savedCharacters,total_chars);	
-						// TODO: It may needs to add thread.sleep for 10 seconds
-					
-					}else
-						names = new String[savedCharacters];
 
-					for (int i = 1; i < savedCharacters; i++) {
+					names = new String[total_chars];
+					names = SWThread.downloadCharacters(savedCharacters, total_chars);
+					// TODO: It may needs to add thread.sleep for 10 seconds
 
-						names[i] = characters.getCharacter(i).getName();
-					}
+				} else
+					names = new String[savedCharacters];
+
+				for (int i = 1; i < savedCharacters; i++) {
+
+					names[i] = characters.getCharacter(i).getName();
 				}
 			}
-		
+		}
+
 		comboBox = new JComboBox<String>(names);
 		// TODO Auto-generated method stub
-		
+
 	}
-	}
+}
