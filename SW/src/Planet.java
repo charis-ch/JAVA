@@ -25,6 +25,20 @@ public class Planet implements Serializable {
 		this.population = population;
 	}
 
+	
+	public Planet(String name){
+		
+		this.name=name;
+		
+		
+	}
+	
+	public String getName(){
+		
+		return this.name;
+		
+	}
+	
 	public String getCharacteristics() {
 		String characteristics = "";
 

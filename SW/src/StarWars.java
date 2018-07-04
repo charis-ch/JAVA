@@ -161,7 +161,7 @@ public class StarWars extends Frame {
 		textArea.setBounds(79, 271, 277, 164);
 		contentPane.add(textArea);
 
-		JComboBox comboBox_1 = new JComboBox<Object>();
+	///	JComboBox comboBox_1 = new JComboBox<Object>();
 		comboBox_1.setBounds(340, 24, 228, 20);
 		contentPane.add(comboBox_1);
 		/**
@@ -254,13 +254,23 @@ public class StarWars extends Frame {
 			}
 
 			if (planets.getPlanet(1) == null) {
-
+SWThread.data=Data.PLANETS;
 				/// SWThread.setThread(Thread.currentThread());
 				names = SWThread.downloadCharacters(total_planets);
-				System.out.println("NUll is 1");
+				System.out.println("NUll is 2");
 				planets.setTotalPlanets(total_planets);
+			try {
+					Thread.sleep(15000);
+					for (int i = 1; i < total_planets; i++) {
+						planets.savePlanet(i, new Planet(names[i]));
 
-			}
+						System.out.println("i= " + i + "\t planet   " + planets.getPlanet(i).getName());
+					}
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				comboBox_1 = new JComboBox<String>(names);	}
 		}
 	}
 
@@ -287,7 +297,7 @@ public class StarWars extends Frame {
 				e2.printStackTrace();
 			}
 			if (characters.getCharacter(1) == null) {
-
+				SWThread.data=Data.PEOPLE;
 				/// SWThread.setThread(Thread.currentThread());
 				names = SWThread.downloadCharacters(total_chars);
 				System.out.println("NUll is 1");

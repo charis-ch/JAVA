@@ -8,7 +8,7 @@ public class SWThread extends SW_Standards implements Runnable {
 	private static String elements[];// = new String[90];
 static	int range = 20;
 	int thread;
-	Data data;
+static	Data data;
 	int limit;
 	int i;
 	private static int finalData;
@@ -34,7 +34,7 @@ range=total/5;System.out.println("Range= "+range);
 		ExecutorService exec = Executors.newFixedThreadPool(5);
 
 		for (int i = 0; i < 5; i++)
-			exec.execute(new SWThread(i, Data.PEOPLE));
+			exec.execute(new SWThread(i, data));
 		exec.shutdown();
 
 		return elements;
