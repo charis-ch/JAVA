@@ -21,7 +21,7 @@ public abstract class SWData implements Serializable {
 			data.writeObject(obj);
 			data.close();
 			file.close();
-			System.out.println("The current state has been saved!");
+			System.out.println("The current state of "+feature.toString()+" has been saved!");
 		} catch (IOException e) {
 			e.printStackTrace();
 			// TODO: handle exception
@@ -39,16 +39,17 @@ public abstract class SWData implements Serializable {
 			data.close();
 			file.close();
 		} catch (FileNotFoundException notfound) {
-			System.out.println("File not found!\nCreation of the specified features has been  started...\n");
+			
 			switch (feature) {
 
-			case PEOPLE: {
+			case PEOPLE: {System.out.println("File not found!\nCreation of the specified feature PEOPLE has been  started...\n");
 				//: TODO initiliaze total characters 
 				People people = new People();
 				people.saveCharacter(0, null);
 				return obj = people;
 			}
-			case PLANETS: {Planets planets = new Planets();
+			case PLANETS: { System.out.println("File not found!\nCreation of the specified feature PLANET has been  started...\n");
+				Planets planets = new Planets();
 			planets.savePlanet(0, null);
 			return obj = planets;
 				

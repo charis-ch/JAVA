@@ -2,6 +2,10 @@ import java.util.HashMap;
 
 public class People extends SWData {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 931236300641646756L;
 	private int totalCharacters;
 	private HashMap<Integer, Character> characters = new HashMap<Integer, Character>();
 

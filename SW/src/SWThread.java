@@ -4,33 +4,37 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class SWThread extends SW_Standards implements Runnable {
+public class SWThread extends Resources  implements Runnable {
 	private static String elements[];// = new String[90];
-static	int range = 20;
+	static int range = 20;
 	int thread;
-static	Data data;
+	static Data data;
 	int limit;
 	int i;
 	private static int finalData;
 	private final AtomicBoolean running = new AtomicBoolean(true);
 
-	public static String[] downloadCharacters(int start,int end) {
-		elements = new String[end+1];
+	public static String[] downloadCharacters(int start, int end) {
+		elements = new String[end + 1];
 
 		ExecutorService exec = Executors.newFixedThreadPool(5);
-int range=(end-start)/5;
-finalData=end;
+		int range = (end - start) / 5;
+		finalData = end;
 		for (int i = 0; i < 5; i++)
-			exec.execute(new SWThread(i,range, Data.PEOPLE));
+			exec.execute(new SWThread(i, range, Data.PEOPLE));
 		exec.shutdown();
 
 		return elements;
 
 	}
-	public static String[] downloadCharacters(int total) {
-		finalData=total;
+
+	public static String[] downloadFeatureNames(int total) {
+	
+		
+		finalData = total;
 		elements = new String[total];
-range=total/5;System.out.println("Range= "+range);
+		range = total / 5;
+		System.out.println("Range= " + range);
 		ExecutorService exec = Executors.newFixedThreadPool(5);
 
 		for (int i = 0; i < 5; i++)
@@ -40,7 +44,11 @@ range=total/5;System.out.println("Range= "+range);
 		return elements;
 
 	}
-
+public SWThread(Data feature) {
+	
+	data=feature;
+	
+}
 	public SWThread(int x, Data people) {
 
 		thread = x;
@@ -51,17 +59,16 @@ range=total/5;System.out.println("Range= "+range);
 	}
 
 	public SWThread(int i2, int range2, Data data) {
-		
-		
+
 		thread = i2;
 		this.data = data;
-		range=range2;
+		range = range2;
 		limit = range * thread + range;
 		i = range * thread;
-		
-		
+
 		// TODO Auto-generated constructor stub
 	}
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		// SWThread a = new SWThread(0, Data.PEOPLE);

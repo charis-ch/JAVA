@@ -16,7 +16,7 @@ public class Planet implements Serializable {
 			String terrain, int surfaceWater, int population) {
 		this.name = name;
 		this.rotationPeriod = rotationPeriod;
-		this.orbital_period=orbital_period;
+		this.orbital_period = orbital_period;
 		this.diameter = diameter;
 		this.climate = climate;
 		this.gravity = gravity;
@@ -25,27 +25,31 @@ public class Planet implements Serializable {
 		this.population = population;
 	}
 
-	
-	public Planet(String name){
-		
-		this.name=name;
-		
-		
+	public Planet(String name) {
+
+		this.name = name;
+
 	}
-	
-	public String getName(){
-		
+
+	public String getClimate() {
+		return this.climate;
+
+	}
+
+	public String getName() {
+
 		return this.name;
-		
+
 	}
-	
+
 	public String getCharacteristics() {
 		String characteristics = "";
 
-		characteristics = "Name  " + this.name + "\n" + "Rotation period :" + this.rotationPeriod + "\n"
-				+ "Orbital period :" + this.orbital_period + "\n" + "Diameter :" + this.diameter + "\n" + "Climate  "
-				+ this.climate + "\n" + "Gravity :" + this.gravity + "\n" + "Terrain : " + this.terrain + "\n"
-				+ "Surface water : " + this.surfaceWater + "\n" + "Population : " + this.population;
+		characteristics = "Name:                    " + this.name + "\n" + "Rotation period:   " + this.rotationPeriod
+				+ "\n" + "Orbital period:      " + this.orbital_period + "\n" + "Diameter:             " + this.diameter
+				+ "\n" + "Climate:                " + this.climate + "\n" + "Gravity:                 " + this.gravity
+				+ "\n" + "Terrain:                " + this.terrain + "\n" + "Surface water:    " + this.surfaceWater
+				+ "\n" + "Population:         " + this.population;
 
 		return characteristics;
 
@@ -54,11 +58,10 @@ public class Planet implements Serializable {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		
 		System.out.println(
 				"Unit testing for the class Planet has been started!\n******************************************************\n");
 
-		Planet Tatooine = new Planet("Tatooine", 23, 304,10465,"arid","1 standard","desert",1,20000);
+		Planet Tatooine = new Planet("Tatooine", 23, 304, 10465, "arid", "1 standard", "desert", 1, 20000);
 		System.out.println("Creating the Tatooine  object.\nPlease wait...\n");
 		System.out.println("\n******************************************************");
 		if (Tatooine == null) {
@@ -71,7 +74,5 @@ public class Planet implements Serializable {
 					"\nThe Tatooine object has been successfully created!!!\n******************************************************");
 		}
 	}
-		
-	}
 
-
+}

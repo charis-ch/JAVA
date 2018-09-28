@@ -2,7 +2,13 @@ import java.util.ArrayList;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import javax.net.ssl.HttpsURLConnection;
 public class Resources extends SW_Standards {
 
 static ArrayList <String> chars=new ArrayList<String>();
