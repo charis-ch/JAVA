@@ -2,21 +2,25 @@ import java.io.Serializable;
 
 public class Planet implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5136817611475726278L;
 	private String name;
 	private int rotationPeriod;
-	private int orbital_period;
+	private int orbitalPeriod;
 	private int diameter;
 	private String climate;
 	private String gravity;
 	private String terrain;
 	private int surfaceWater;
-	private int population;
+	private long population;
 
 	public Planet(String name, int rotationPeriod, int orbital_period, int diameter, String climate, String gravity,
-			String terrain, int surfaceWater, int population) {
+			String terrain, int surfaceWater, long population) {
 		this.name = name;
 		this.rotationPeriod = rotationPeriod;
-		this.orbital_period = orbital_period;
+		this.orbitalPeriod = orbital_period;
 		this.diameter = diameter;
 		this.climate = climate;
 		this.gravity = gravity;
@@ -31,6 +35,31 @@ public class Planet implements Serializable {
 
 	}
 
+	public int getRotationPeriod() {
+		return this.rotationPeriod;
+
+	}
+
+	public int getOrditalPeriod() {
+		return this.getOrditalPeriod();
+
+	}
+
+	public int getDiameter() {
+		return this.diameter;
+
+	}
+
+	public int getSurfaceWater() {
+		return this.surfaceWater;
+
+	}
+
+	public long getPopulation() {
+		return this.population;
+
+	}
+
 	public String getClimate() {
 		return this.climate;
 
@@ -42,19 +71,40 @@ public class Planet implements Serializable {
 
 	}
 
+	private static String determineValueOf(int value) {
+		return (value == -1) ? "Unkonwn" : String.valueOf(value);
+
+	}
+
 	public String getCharacteristics() {
 		String characteristics = "";
+		String rotationPeriod, diameter, orbitalPeriod, population, surfaceWater;
+		rotationPeriod = determineValueOf(this.rotationPeriod);
+		diameter = determineValueOf(this.diameter);
+		orbitalPeriod = determineValueOf(this.orbitalPeriod);
+		if (this.population == -1)
+			population = "Unknown";
+		else
+			population = String.valueOf(this.population);
+		surfaceWater = determineValueOf(this.surfaceWater);
 
-		characteristics = "Name:                    " + this.name + "\n" + "Rotation period:   " + this.rotationPeriod
-				+ "\n" + "Orbital period:      " + this.orbital_period + "\n" + "Diameter:             " + this.diameter
-				+ "\n" + "Climate:                " + this.climate + "\n" + "Gravity:                 " + this.gravity
-				+ "\n" + "Terrain:                " + this.terrain + "\n" + "Surface water:    " + this.surfaceWater
-				+ "\n" + "Population:         " + this.population;
+		characteristics = "Name:                    " + this.name + "\n" + "Rotation period:   " + rotationPeriod + "\n"
+				+ "Orbital period:      " + orbitalPeriod + "\n" + "Diameter:             " + diameter + "\n"
+				+ "Climate:                " + this.climate + "\n" + "Gravity:                 " + this.gravity + "\n"
+				+ "Terrain:                " + this.terrain + "\n" + "Surface water:    " + surfaceWater + "\n"
+				+ "Population:         " + population;
 
 		return characteristics;
 
 	}
 
+	/***
+	 * 
+	 * Unit testing for the Planet class.
+	 * 
+	 */
+
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 

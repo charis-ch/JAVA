@@ -19,8 +19,7 @@ public class People extends SWData {
 	
 
 	public int getTotalCharacters(){
-		
-		
+			
 		return totalCharacters;
 	}	
 	
@@ -30,7 +29,7 @@ public class People extends SWData {
 		for(Integer key:characters.keySet()){
 		try {	
 			Character temp=characters.get(key);
-			//System.out.println("NUmber : "+key+"\t"+temp.getName());
+			
 			System.out.println(temp.getCharacteristics());
 		}catch (NullPointerException e) {
 			
@@ -46,7 +45,6 @@ public class People extends SWData {
 	 * This method retrieves a character according to a number(the specified number is based on the 
 	 * swapi-appearance of the characters)
 	 * 
-	 * 
 	 * */
 	Character getCharacter(Integer character) {
 
@@ -57,8 +55,7 @@ public class People extends SWData {
 	/**
 	 * 
 	 * The following method inserts to known characters a new character.
-	 * 
-	 * 
+	 *
 	 * */
 	void saveCharacter(Integer key, Character value) {
 		characters.put(key, value);
@@ -71,7 +68,6 @@ public class People extends SWData {
 	 *  
 	 * In the main method 2 characters are created and randomly 
 	 * one of them is displayed on the console
-	 *
 	 * 
 	 * */
 

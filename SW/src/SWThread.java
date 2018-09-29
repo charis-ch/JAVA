@@ -5,7 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class SWThread extends Resources  implements Runnable {
-	private static String elements[];// = new String[90];
+	private static String elements[];
 	static int range = 20;
 	int thread;
 	static Data data;
@@ -55,44 +55,43 @@ public SWThread(Data feature) {
 		data = people;
 		limit = range * thread + range;
 		i = range * thread;
-		// TODO Auto-generated constructor stub
+		
 	}
 
-	public SWThread(int i2, int range2, Data data) {
+	public SWThread(int i2, int range2, Data feature) {
 
 		thread = i2;
-		this.data = data;
+		data = feature;
 		range = range2;
 		limit = range * thread + range;
 		i = range * thread;
 
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		// SWThread a = new SWThread(0, Data.PEOPLE);
-		// SWThread b = new SWThread(1, Data.PEOPLE);
-		// SWThread c = new SWThread(2, Data.PEOPLE);
-		// SWThread d = new SWThread(3, Data.PEOPLE);
-		// SWThread e = new SWThread(4, Data.PEOPLE);
-		/**
-		 * a.run(0, Data.PEOPLE);System.out.println("Next!"); b.run(1,
-		 * Data.PEOPLE);System.out.println("Next!"); c.run(2,
-		 * Data.PEOPLE);System.out.println("Next!"); d.run(3,
-		 * Data.PEOPLE);System.out.println("Next!"); e.run(4, Data.PEOPLE);
-		 **/
-		// new Thread(new SWThread(0, Data.PEOPLE)).start();//).start();
-		ExecutorService exec = Executors.newFixedThreadPool(5);
 
-		for (int i = 0; i < 5; i++)
-			exec.execute(new SWThread(i, Data.PEOPLE));
-		exec.shutdown();
+	
+		data=Data.PEOPLE;
+		String characters[]=downloadFeatureNames(81);
+		
+		try {
+			Thread.sleep(15000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}for(String str:characters)
+			System.out.println(str);
+//		ExecutorService exec = Executors.newFixedThreadPool(5);
+//
+//		for (int i = 0; i < 5; i++)
+//			exec.execute(new SWThread(i, Data.PEOPLE));
+//		exec.shutdown();
 
 	}
 
 	@Override
-	public void run() {// (int thread, Data data) {
+	public void run() {
 
 		while (running.get()) {
 			int i = range * thread;
@@ -101,7 +100,7 @@ public SWThread(Data feature) {
 
 			if (thread == 4)
 				limit = finalData;
-			// TODO Auto-generated method stub
+			
 			for (i = i + 1; i <= limit; i++) {
 
 				uri = data.name().toLowerCase() + "/" + String.valueOf(i) + "/";
@@ -116,13 +115,19 @@ public SWThread(Data feature) {
 					obj = new JSONObject(str);
 					elements[i] = obj.get("name").toString();
 				}
-				// System.out.println(obj.get("name"));
+				
 
 				catch (JSONException e) {
 
 					e.printStackTrace();
 				} catch (NullPointerException nullPointer) {
 					/// return null;
+				
+				}catch (ArrayIndexOutOfBoundsException bound) {
+					
+					bound.printStackTrace();
+					
+					System.out.println(elements.length+"=="+i+"   ???");
 				}
 
 			}

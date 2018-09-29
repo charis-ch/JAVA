@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 
 /**
  * 
- * This class initilizes a frame for a GUI application.
+ * This class initializes a frame for a GUI application.
  * 
  * Result: An empty frame will appear on the center of the screen.
  * 

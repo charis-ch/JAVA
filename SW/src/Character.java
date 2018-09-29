@@ -2,13 +2,17 @@ import java.io.Serializable;
 
 public class Character  implements Serializable{
 
-	String name;
-	int height;
-	int mass;
-	String hair_colour;
-	String skin_colour;
-	String eye_colour;
-	String birth_year;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 974155254530248809L;
+	private String name;
+	private int height;
+	private int mass;
+	private String hair_colour;
+	private String skin_colour;
+	private String eye_colour;
+	private String birth_year;
 
 	/**
 	 * 
@@ -47,7 +51,7 @@ public class Character  implements Serializable{
 			mass = "unknown";
 		else
 			mass = String.valueOf(this.mass) + " Kg";
-		return "Name:        " + name + "\n" + "Height:      " + height + "\n" + "Mass:        " + mass + "\n"
+		return "Name:          " + name + "\n" + "Height:        " + height + "\n" + "Mass:          " + mass + "\n"
 				+ "Hair colour: " + hair_colour + "\n" + "Skin colour: " + skin_colour + "\n" + "Eye colour:  "
 				+ eye_colour + "\n" + "Birth year:  " + birth_year;
 
@@ -59,8 +63,42 @@ public class Character  implements Serializable{
 
 	}
 
-	public Character(String name) {
-		// TODO Auto-generated constructor stub
+	
+	// if returns -1 then the value is unknown
+public int getHeight() {
+	return this.height;
+	
+}
+
+    //if returns -1 then the value is unknown
+public int getMass() {
+	return this.mass;
+	
+}
+
+public String getHairColour() {
+	return this.hair_colour;
+	
+}
+
+
+public String getSkinColour() {
+	return this.skin_colour;
+	
+}
+public String getEyeColour() {
+	return this.eye_colour;
+	
+}
+
+
+public String getBirthYear() {
+	return this.birth_year;
+	
+}
+
+public Character(String name) {
+		
 
 		this.name = name;
 	}

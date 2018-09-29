@@ -5,7 +5,11 @@ public class Planets extends SWData {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -4865690625692729611L;
+	/**
+	 * 
+	 */
+
 	private int totalPlanets;
 	private HashMap<Integer, Planet> planets = new HashMap<Integer, Planet>();
 	void savePlanet(Integer key, Planet value) {
