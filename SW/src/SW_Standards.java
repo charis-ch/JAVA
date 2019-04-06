@@ -46,7 +46,7 @@ public abstract class SW_Standards {
 			url = new URL(uri);
 			HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
 			connection.addRequestProperty("User-Agent", "Mozilla/5.0");
-		//connection.setRequestProperty("Content-Type", "application/xml");
+	
 
 			BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
@@ -56,16 +56,7 @@ public abstract class SW_Standards {
 
 			}
 			
-		/***	
-			System.out.println(
-					"==============================================================================================================");
-			// String[] names=str.split("name");
 
-			System.out.println(str);
-			System.out.println(
-					"==============================================================================================================");
-			
-			*/
 		} catch (MalformedURLException e) {
 
 			e.printStackTrace();
@@ -85,13 +76,11 @@ public abstract class SW_Standards {
 	 * 
 	 * The unit test for the abstract class SW_Standards
 	 * 
-	 * 
-	 * 
 	 */
 	public static void main(String args[]) {
 
 		String uri = "https://www.google.com.cy";
-		accessURL(uri);
+		System.out.println(accessURL(uri));
 
 	}
 
